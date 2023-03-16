@@ -2,16 +2,16 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import images, { ImageMap } from "../assets";
 
-const choices = ["rock", "paper", "scissors"];
+const choices: string[] = ["rock", "paper", "scissors"];
 
 export const Game = () => {
-  const [playerChoice, setPlayerChoice] = useState("");
-  const [computerChoice, setComputerChoice] = useState("");
-  const [result, setResult] = useState("");
-  const [playerScore, setPlayerScore] = useState(0);
-  const [computerScore, setComputerScore] = useState(0);
+  const [playerChoice, setPlayerChoice] = useState<string>("");
+  const [computerChoice, setComputerChoice] = useState<string>("");
+  const [result, setResult] = useState<string>("");
+  const [playerScore, setPlayerScore] = useState<number>(0);
+  const [computerScore, setComputerScore] = useState<number>(0);
 
-  function handleClick(choice: any) {
+  function handleClick(choice: string) {
     const randomIndex = Math.floor(Math.random() * choices.length);
     const computerChoice = choices[randomIndex];
 
@@ -42,9 +42,8 @@ export const Game = () => {
       </ScoreStyled>
       <ChoicesStyled>
         {choices.map((choice) => (
-          <ChoiceWrapperStyled>
+          <ChoiceWrapperStyled key={choice}>
             <ChoiceStyled
-              key={choice}
               onClick={() => handleClick(choice)}
               src={images[choice as keyof ImageMap]}
               alt={choice}
@@ -56,13 +55,21 @@ export const Game = () => {
       <ResultStyled className="result">
         {playerChoice && (
           <>
-            <ResultText >
+            <ResultText>
               You{" "}
-              <img src={images[playerChoice as keyof ImageMap]} width={20} alt={playerChoice}/>
+              <img
+                src={images[playerChoice as keyof ImageMap]}
+                width={20}
+                alt={playerChoice}
+              />
             </ResultText>
             <p data-testid="result">{result}</p>
-            <ResultText >
-              <img src={images[computerChoice as keyof ImageMap]} width={20} alt={computerChoice}/>
+            <ResultText>
+              <img
+                src={images[computerChoice as keyof ImageMap]}
+                width={20}
+                alt={computerChoice}
+              />
               Computer
             </ResultText>
           </>
