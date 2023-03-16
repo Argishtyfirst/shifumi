@@ -56,12 +56,12 @@ export const Game = () => {
       <ResultStyled className="result">
         {playerChoice && (
           <>
-            <ResultText>
+            <ResultText >
               You{" "}
               <img src={images[playerChoice as keyof ImageMap]} width={20} alt={playerChoice}/>
             </ResultText>
-            <p>{result}</p>
-            <ResultText>
+            <p data-testid="result">{result}</p>
+            <ResultText >
               <img src={images[computerChoice as keyof ImageMap]} width={20} alt={computerChoice}/>
               Computer
             </ResultText>
